@@ -1,14 +1,1036 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>아로마모먼트 | 아로마 지도자 2급 자격과정</title>
+  <style>
+    /* ===== FONTS ===== */
+    @font-face {
+      font-family: 'SBAggro';
+      src: url('wow/SB 어그로 L.ttf') format('truetype');
+      font-weight: 300;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SBAggro';
+      src: url('wow/SB 어그로 M.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SBAggro';
+      src: url('wow/SB 어그로 B.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'GmarketSans';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff') format('woff');
+      font-weight: 300;
+    }
+    @font-face {
+      font-family: 'GmarketSans';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+      font-weight: 500;
+    }
+    @font-face {
+      font-family: 'GmarketSans';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+      font-weight: 700;
+    }
+
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --bg-light:    #EBF5FB;
+      --bg-mid:      #D6EAF8;
+      --bg-white:    #FFFFFF;
+      --primary:     #5B9EC9;
+      --primary-dark:#2C6D9B;
+      --primary-deep:#1A4A70;
+      --primary-light:#A8D8F0;
+      --accent:      #3A7EC4;
+      --text-dark:   #1C3A54;
+      --text-mid:    #4A7090;
+      --text-light:  #7AAABB;
+      --border:      #C5DFF0;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'SBAggro', 'GmarketSans', 'Noto Sans KR', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      z-index: 1000;
+      height: 70px;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary-light);
+    }
+    .nav-logo-text .brand {
+      display: block;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--primary-deep);
+      letter-spacing: -0.02em;
+    }
+    .nav-logo-text .sub {
+      display: block;
+      font-size: 0.6rem;
+      color: var(--text-mid);
+      letter-spacing: 0.1em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-mid);
+      font-size: 0.9rem;
+      font-weight: 400;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--primary-dark); }
+    .nav-cta {
+      background: var(--primary-dark) !important;
+      color: #fff !important;
+      padding: 0.45rem 1.2rem !important;
+      border-radius: 25px;
+      font-weight: 700 !important;
+      font-size: 0.85rem !important;
+      transition: background .2s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--primary-dark);
+      border-radius: 2px;
+      transition: .3s;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 70px; left: 0;
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 5%;
+      z-index: 999;
+    }
+    .mobile-menu.open { display: block; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
+    .mobile-menu a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-size: 1rem;
+      font-weight: 400;
+      padding: .55rem 0;
+      display: block;
+      border-bottom: 1px solid var(--bg-light);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 70px;
+      background-image: url('https://aromamean.pages.dev/aromamean/use3.png');
+      background-size: cover;
+      background-position: center;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(150deg,
+        rgba(28, 75, 120, 0.78) 0%,
+        rgba(58, 126, 196, 0.65) 60%,
+        rgba(91, 158, 201, 0.55) 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 1;
+      color: #fff;
+      max-width: 720px;
+      padding: 3rem 1.5rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.45);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      padding: .35rem 1.1rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      letter-spacing: .12em;
+      margin-bottom: 1.8rem;
+    }
+    .hero h1 {
+      font-weight: 700;
+      font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,.35);
+    }
+    .hero h1 .sub-line {
+      display: block;
+      font-weight: 300;
+      font-size: .52em;
+      letter-spacing: .1em;
+      opacity: .88;
+      margin-top: .35rem;
+    }
+    .hero p {
+      font-size: .97rem;
+      opacity: .85;
+      line-height: 1.75;
+      margin-bottom: 2.2rem;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #fff;
+      color: var(--primary-deep);
+      padding: .8rem 2.1rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .95rem;
+      transition: all .25s;
+      box-shadow: 0 4px 18px rgba(0,0,0,.22);
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.28); }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      padding: .8rem 2.1rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: .95rem;
+      border: 2px solid rgba(255,255,255,.65);
+      transition: all .25s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.15); border-color: #fff; }
+
+    /* ===== COMMON SECTION ===== */
+    section { padding: 90px 5%; }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
+    .section-tag {
+      display: inline-block;
+      font-size: .72rem;
+      letter-spacing: .18em;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: .65rem;
+    }
+    .section-title {
+      font-weight: 700;
+      font-size: clamp(1.6rem, 3vw, 2.3rem);
+      color: var(--text-dark);
+      line-height: 1.35;
+    }
+    .section-title em { color: var(--primary); font-style: normal; }
+    .section-desc {
+      margin-top: .75rem;
+      color: var(--text-mid);
+      font-size: .93rem;
+      line-height: 1.75;
+    }
+
+    /* ===== ABOUT ===== */
+    #about { background: var(--bg-white); }
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-image-wrap { position: relative; }
+    .about-image-wrap img {
+      width: 100%;
+      border-radius: 20px;
+      display: block;
+      box-shadow: 0 12px 45px rgba(44,109,155,.18);
+    }
+    .about-badge {
+      position: absolute;
+      bottom: -18px; right: -18px;
+      background: var(--primary-dark);
+      color: #fff;
+      padding: 1.2rem 1.5rem;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 6px 22px rgba(44,109,155,.4);
+    }
+    .about-badge .num { display: block; font-size: 1.9rem; font-weight: 700; line-height: 1; }
+    .about-badge .lbl { font-size: .68rem; opacity: .85; }
+
+    .about-text { padding-right: 1rem; }
+    .about-text h2 {
+      font-weight: 700;
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      color: var(--text-dark);
+      margin-bottom: .3rem;
+    }
+    .instructor-title {
+      color: var(--primary);
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 1.3rem;
+      letter-spacing: .04em;
+    }
+    .about-text p {
+      color: var(--text-mid);
+      line-height: 1.82;
+      font-size: .93rem;
+      margin-bottom: 1.4rem;
+    }
+    .credentials { list-style: none; display: flex; flex-direction: column; gap: .45rem; }
+    .credentials li {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .86rem;
+      color: var(--text-mid);
+    }
+    .credentials li::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: .9rem;
+      margin-top: 2rem;
+    }
+    .stat-item {
+      background: var(--bg-light);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+    .stat-item .num { display: block; font-size: 1.45rem; font-weight: 700; color: var(--primary-dark); }
+    .stat-item .lbl { font-size: .7rem; color: var(--text-mid); }
+
+    /* ===== CURRICULUM ===== */
+    #curriculum { background: var(--bg-light); }
+    .curriculum-inner { max-width: 1100px; margin: 0 auto; }
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.5rem;
+    }
+    .curriculum-card {
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 22px rgba(44,109,155,.09);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .curriculum-card:hover { transform: translateY(-7px); box-shadow: 0 14px 38px rgba(44,109,155,.2); }
+    .card-image { height: 210px; overflow: hidden; }
+    .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
+    .curriculum-card:hover .card-image img { transform: scale(1.06); }
+    .card-body { padding: 1.5rem; }
+    .card-number { font-size: .68rem; font-weight: 700; letter-spacing: .12em; color: var(--primary-light); margin-bottom: .5rem; }
+    .card-body h3 { font-weight: 700; font-size: 1.2rem; color: var(--text-dark); margin-bottom: .65rem; }
+    .card-body p { color: var(--text-mid); font-size: .87rem; line-height: 1.72; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1rem; }
+    .card-tags span {
+      background: var(--bg-light);
+      color: var(--primary-dark);
+      padding: .22rem .7rem;
+      border-radius: 20px;
+      font-size: .7rem;
+      font-weight: 700;
+      border: 1px solid var(--border);
+    }
+
+    /* ===== TARGET ===== */
+    #target { background: var(--bg-white); }
+    .target-inner { max-width: 900px; margin: 0 auto; }
+    .target-list { display: flex; flex-direction: column; gap: 1rem; }
+    .target-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+      background: var(--bg-light);
+      border-radius: 16px;
+      padding: 1.35rem 1.5rem;
+      border: 1px solid var(--border);
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .target-item:hover { border-color: var(--primary-light); box-shadow: 0 4px 18px rgba(44,109,155,.12); }
+    .target-icon {
+      width: 48px; height: 48px;
+      background: var(--primary-dark);
+      border-radius: 13px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .target-item h4 { font-weight: 700; color: var(--text-dark); margin-bottom: .22rem; font-size: .97rem; }
+    .target-item p { color: var(--text-mid); font-size: .84rem; line-height: 1.62; }
+
+    /* ===== QUOTE STRIP ===== */
+    .quote-strip {
+      position: relative;
+      height: 390px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background-image: url('https://aromamean.pages.dev/aromamean/wow.png');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .quote-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(150deg, rgba(28,75,120,.82) 0%, rgba(58,126,196,.72) 100%);
+    }
+    .quote-content { position: relative; z-index: 1; color: #fff; max-width: 700px; padding: 0 1.5rem; }
+    .quote-mark { font-size: 3.5rem; opacity: .35; line-height: 1; margin-bottom: -.5rem; }
+    .quote-content blockquote {
+      font-weight: 300;
+      font-size: clamp(1.3rem, 2.8vw, 2rem);
+      line-height: 1.65;
+      letter-spacing: .03em;
+      text-shadow: 0 2px 12px rgba(0,0,0,.3);
+    }
+
+    /* ===== CLASS INFO ===== */
+    #info { background: var(--bg-light); }
+    .info-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .schedule-card, .price-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 4px 22px rgba(44,109,155,.09);
+    }
+    .card-title {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--bg-light);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      background: var(--bg-light);
+      color: var(--text-mid);
+      font-size: .78rem;
+      font-weight: 700;
+      padding: .7rem .85rem;
+      text-align: left;
+      letter-spacing: .05em;
+    }
+    td {
+      padding: .9rem .85rem;
+      font-size: .87rem;
+      color: var(--text-dark);
+      border-bottom: 1px solid var(--bg-light);
+    }
+    tr:last-child td { border-bottom: none; }
+    .time-badge {
+      display: inline-block;
+      background: var(--bg-mid);
+      color: var(--primary-dark);
+      padding: .2rem .65rem;
+      border-radius: 8px;
+      font-size: .74rem;
+      font-weight: 700;
+    }
+    .schedule-note {
+      margin-top: 1.2rem;
+      font-size: .81rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    .price-main {
+      text-align: center;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--bg-light);
+      margin-bottom: 1.5rem;
+    }
+    .price-label { font-size: .78rem; color: var(--text-mid); margin-bottom: .45rem; }
+    .price-amount { font-weight: 700; font-size: 2.6rem; color: var(--primary-dark); }
+    .price-amount sup { font-size: 1rem; }
+    .price-includes { list-style: none; display: flex; flex-direction: column; gap: .6rem; }
+    .price-includes li {
+      display: flex; align-items: center; gap: .6rem;
+      font-size: .87rem; color: var(--text-mid);
+    }
+    .price-includes li::before { content: '✓'; color: var(--primary); font-weight: 700; }
+    .price-cta {
+      display: block;
+      width: 100%;
+      background: var(--primary-dark);
+      color: #fff;
+      text-align: center;
+      padding: .92rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      transition: background .2s, transform .2s;
+    }
+    .price-cta:hover { background: var(--accent); transform: translateY(-2px); }
+
+    /* ===== GALLERY + CONTACT ===== */
+    #contact { background: var(--bg-white); }
+    .gallery-contact-inner { max-width: 1100px; margin: 0 auto; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .gallery-item { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .42s; display: block; }
+    .gallery-item:hover img { transform: scale(1.05); }
+    .contact-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    .contact-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--bg-light);
+      border-radius: 16px;
+      padding: 1.2rem 2rem;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color .2s, box-shadow .2s;
+      min-width: 220px;
+    }
+    .contact-box:hover { border-color: var(--primary-light); box-shadow: 0 4px 16px rgba(44,109,155,.12); }
+    .contact-icon {
+      width: 46px; height: 46px;
+      background: var(--primary-dark);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .contact-label { font-size: .7rem; color: var(--text-mid); margin-bottom: .12rem; }
+    .contact-value { font-size: .94rem; font-weight: 700; color: var(--text-dark); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--primary-deep);
+      color: rgba(255,255,255,.65);
+      padding: 2.5rem 5%;
+      text-align: center;
+    }
+    .footer-logo-wrap { display: flex; align-items: center; justify-content: center; gap: .8rem; margin-bottom: .5rem; }
+    .footer-logo-wrap img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; opacity: .85; }
+    .footer-brand { font-size: 1.3rem; font-weight: 700; color: #fff; }
+    .footer-sub { font-size: .8rem; margin-bottom: 1.2rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1.2rem; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .78rem; transition: color .2s; }
+    .footer-links a:hover { color: #fff; }
+    .footer-assoc { font-size: .75rem; margin-bottom: .5rem; }
+    .footer-copy { font-size: .72rem; opacity: .45; }
+
+    /* ===== FLOATING BUTTONS ===== */
+    .float-btns {
+      position: fixed;
+      bottom: 2rem; right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .7rem;
+      z-index: 900;
+    }
+    .float-btn {
+      width: 50px; height: 50px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,.22);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .float-btn:hover { transform: translateY(-3px); box-shadow: 0 7px 22px rgba(0,0,0,.28); }
+    .float-btn-insta { background: linear-gradient(135deg,#405de6,#5851db,#833ab4,#c13584,#e1306c,#fd1d1d); }
+    .float-btn-call  { background: var(--primary-dark); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .about-inner, .info-inner { grid-template-columns: 1fr; }
+      .about-badge { bottom: 10px; right: 10px; }
+      .curriculum-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 65px 4%; }
+      .about-text { padding-right: 0; }
+    }
+    @media (max-width: 480px) {
+      .about-stats { grid-template-columns: repeat(3,1fr); }
+      .contact-row { flex-direction: column; }
+      .contact-box { width: 100%; }
+      .quote-strip { background-attachment: scroll; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="wow/KakaoTalk_20260327_171538735.jpg" alt="아로마모먼트 로고">
+      <div class="nav-logo-text">
+        <span class="brand">아로마모먼트</span>
+        <span class="sub">AROMA MOMENT</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">소개</a></li>
+      <li><a href="#curriculum">커리큘럼</a></li>
+      <li><a href="#info">수업정보</a></li>
+      <li><a href="#contact" class="nav-cta">수강 신청</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" aria-label="메뉴">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#about"      class="mobile-link">소개</a></li>
+      <li><a href="#curriculum" class="mobile-link">커리큘럼</a></li>
+      <li><a href="#info"       class="mobile-link">수업정보</a></li>
+      <li><a href="#contact"    class="mobile-link">문의하기</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">아로마 지도자 2급 자격과정</div>
+      <h1>
+        향기로운 순간,
+        <span class="sub-line">오늘 마음에 쉼표 하나</span>
+      </h1>
+      <p>천연 에센셜 오일로 삶에 깊이를 더하는 아로마테라피 지도자 과정<br>소수 정예로 진행되는 6주 완성 프로그램</p>
+      <div class="hero-buttons">
+        <a href="#contact"    class="btn-primary">수강 신청하기</a>
+        <a href="#curriculum" class="btn-outline">커리큘럼 보기</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section id="about">
+    <div class="about-inner">
+      <div class="about-image-wrap">
+        <img src="wow/KakaoTalk_20260327_171528673.png" alt="강사 조혜리 프로필">
+        <div class="about-badge">
+          <span class="num">54</span>
+          <span class="lbl">종 에센셜오일</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">INSTRUCTOR</div>
+        <h2>조혜리</h2>
+        <p class="instructor-title">아로마모먼트 대표 · 아로마테라피스트</p>
+        <p>한국힐링아로마협회 소속 강사로서 다양한 현장 경험을 바탕으로, 향기가 일상의 쉼이 되는 특별한 수업을 만들어갑니다. 사회복지와 아로마테라피를 접목한 감정 케어 전문가입니다.</p>
+        <ul class="credentials">
+          <li>현) 아로마모먼트 대표</li>
+          <li>현) 한국힐링아로마협회 소속 강사</li>
+          <li>현) 위즈덤 청소년 적성기기 소속 강사</li>
+          <li>아로마전문지도사 1급</li>
+          <li>아로마테라피지도사 2급</li>
+          <li>아로마 DIY 전문지도사 2급</li>
+          <li>아로마 색채심리 테라피</li>
+          <li>사회복지사 1급 · 보육교사 1급</li>
+          <li>청소년 적성평가 전문과정 수료</li>
+          <li>사회복지기관 감정아로마 특강 진행 다수</li>
+          <li>공공기관 힐링프로그램 진행 다수</li>
+        </ul>
+        <div class="about-stats">
+          <div class="stat-item">
+            <span class="num">54종</span>
+            <span class="lbl">에센셜오일</span>
+          </div>
+          <div class="stat-item">
+            <span class="num">6주</span>
+            <span class="lbl">완성 과정</span>
+          </div>
+          <div class="stat-item">
+            <span class="num">3개</span>
+            <span class="lbl">시간대 선택</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CURRICULUM ===== -->
+  <section id="curriculum">
+    <div class="curriculum-inner">
+      <div class="section-header">
+        <span class="section-tag">CURRICULUM</span>
+        <h2 class="section-title">무엇을 배우나요?</h2>
+        <p class="section-desc">이론부터 실습, 감정 케어까지 — 아로마테라피의 모든 것을 담았습니다</p>
+      </div>
+      <div class="curriculum-grid">
+
+        <div class="curriculum-card">
+          <div class="card-image">
+            <img src="https://aromamean.pages.dev/aromamean/use2.png" alt="아로마 이론 수업">
+          </div>
+          <div class="card-body">
+            <div class="card-number">MODULE 01</div>
+            <h3>아로마 이론</h3>
+            <p>54종 에센셜 오일의 특성과 효능을 체계적으로 학습합니다. 안전한 활용법과 배합 원리를 익혀 전문적인 지식을 쌓아갑니다.</p>
+            <div class="card-tags">
+              <span>에센셜오일 54종</span>
+              <span>배합이론</span>
+              <span>안전활용</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="curriculum-card">
+          <div class="card-image">
+            <img src="https://aromamean.pages.dev/aromamean/use4.png" alt="DIY 실습">
+          </div>
+          <div class="card-body">
+            <div class="card-number">MODULE 02</div>
+            <h3>DIY 실습</h3>
+            <p>천연 제품을 직접 만들어보는 실습 위주의 수업입니다. 롤온, 디퓨저, 바디오일 등 다양한 DIY 제품을 직접 제작합니다.</p>
+            <div class="card-tags">
+              <span>롤온·디퓨저</span>
+              <span>바디오일</span>
+              <span>천연제품 제작</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="curriculum-card">
+          <div class="card-image">
+            <img src="https://aromamean.pages.dev/aromamean/use1.png" alt="감정 아로마테라피">
+          </div>
+          <div class="card-body">
+            <div class="card-number">MODULE 03</div>
+            <h3>감정 아로마테라피</h3>
+            <p>향기와 감정의 연결고리를 탐구합니다. 색채심리와 결합된 감정 케어 아로마테라피로 더 깊은 치유를 경험합니다.</p>
+            <div class="card-tags">
+              <span>색채심리</span>
+              <span>감정케어</span>
+              <span>힐링테라피</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TARGET ===== -->
+  <section id="target">
+    <div class="target-inner">
+      <div class="section-header">
+        <span class="section-tag">FOR WHO</span>
+        <h2 class="section-title">이런 분께 꼭 맞는 과정이에요</h2>
+      </div>
+      <div class="target-list">
+
+        <div class="target-item">
+          <div class="target-icon">🌿</div>
+          <div>
+            <h4>일상에 자연의 향기를 더하고 싶은 분</h4>
+            <p>천연 에센셜 오일로 집 안을 향기롭게 바꾸고, 나만의 힐링 루틴을 만들고 싶은 분</p>
+          </div>
+        </div>
+
+        <div class="target-item">
+          <div class="target-icon">👨‍👩‍👧</div>
+          <div>
+            <h4>가족 건강을 천연으로 관리하고 싶은 분</h4>
+            <p>화학성분 없는 천연 제품으로 가족의 건강과 감정을 세심하게 돌보고 싶은 분</p>
+          </div>
+        </div>
+
+        <div class="target-item">
+          <div class="target-icon">💼</div>
+          <div>
+            <h4>전문 자격증으로 커리어를 쌓고 싶은 분</h4>
+            <p>아로마 지도자 2급 자격증을 취득해 강사, 상담사, 창업 등 새로운 커리어를 시작하려는 분</p>
+          </div>
+        </div>
+
+        <div class="target-item">
+          <div class="target-icon">🏥</div>
+          <div>
+            <h4>사회복지·상담 현장에 아로마를 접목하려는 분</h4>
+            <p>복지관, 병원, 상담 센터에서 감정 케어 도구로 아로마테라피를 활용하고 싶은 분</p>
+          </div>
+        </div>
+
+        <div class="target-item">
+          <div class="target-icon">✨</div>
+          <div>
+            <h4>나를 위한 쉼과 힐링이 필요한 분</h4>
+            <p>지친 일상에서 벗어나 향기를 통해 마음의 쉼표를 찍고 싶은 분</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== QUOTE STRIP ===== -->
+  <div class="quote-strip">
+    <div class="quote-overlay"></div>
+    <div class="quote-content">
+      <div class="quote-mark">"</div>
+      <blockquote>향기는 기억보다 오래,<br>말보다 깊이 남습니다</blockquote>
+    </div>
+  </div>
+
+  <!-- ===== CLASS INFO ===== -->
+  <section id="info">
+    <div class="section-header">
+      <span class="section-tag">CLASS INFO</span>
+      <h2 class="section-title">수업 정보</h2>
+      <p class="section-desc">일정과 수강료를 확인하고 편하게 문의해 주세요</p>
+    </div>
+    <div class="info-inner">
+      <div class="schedule-card">
+        <div class="card-title">📅 수업 일정</div>
+        <table>
+          <thead>
+            <tr>
+              <th>시간대</th>
+              <th>운영 시간</th>
+              <th>주기</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="time-badge">오전반</span></td>
+              <td>10:00 – 12:00</td>
+              <td>주 1회</td>
+            </tr>
+            <tr>
+              <td><span class="time-badge">오후반</span></td>
+              <td>14:00 – 16:00</td>
+              <td>주 1회</td>
+            </tr>
+            <tr>
+              <td><span class="time-badge">저녁반</span></td>
+              <td>협의 조정</td>
+              <td>주 1회</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="schedule-note">
+          · 총 6주, 주 1회 2시간 진행<br>
+          · 소수 정예 수업 (최대 6인)<br>
+          · 수료 후 무한 청강 혜택 제공
+        </p>
+      </div>
+
+      <div class="price-card">
+        <div class="card-title">💳 수강료</div>
+        <div class="price-main">
+          <p class="price-label">전체 과정 수강료</p>
+          <div class="price-amount"><sup>₩</sup>470,000</div>
+        </div>
+        <ul class="price-includes">
+          <li>교재 포함</li>
+          <li>자격증 발급비 포함</li>
+          <li>실습 재료비 포함</li>
+          <li>에센셜 오일 키트 제공</li>
+          <li>수료 후 무한 청강</li>
+        </ul>
+        <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener" class="price-cta">
+          📩 수강 문의하기
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY + CONTACT ===== -->
+  <section id="contact">
+    <div class="gallery-contact-inner">
+      <div class="section-header">
+        <span class="section-tag">GALLERY &amp; CONTACT</span>
+        <h2 class="section-title">수업 현장 &amp; 문의</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="https://aromamean.pages.dev/aromamean/use5.png" alt="수업 현장">
+        </div>
+        <div class="gallery-item">
+          <img src="https://aromamean.pages.dev/aromamean/use1.png" alt="아로마 제품">
+        </div>
+      </div>
+      <div class="contact-row">
+        <a href="tel:010-6557-3810" class="contact-box">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">전화 문의</div>
+            <div class="contact-value">010.6557.3810</div>
+          </div>
+        </a>
+        <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener" class="contact-box">
+          <div class="contact-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">인스타그램</div>
+            <div class="contact-value">@aroma_moment24</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-logo-wrap">
+      <img src="wow/KakaoTalk_20260327_171538735.jpg" alt="아로마모먼트">
+      <span class="footer-brand">아로마모먼트</span>
+    </div>
+    <div class="footer-sub">아로마테라피스트 조혜리 · AROMA MOMENT</div>
+    <div class="footer-links">
+      <a href="#about">소개</a>
+      <a href="#curriculum">커리큘럼</a>
+      <a href="#info">수업정보</a>
+      <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener">Instagram</a>
+    </div>
+    <p class="footer-assoc">한국힐링아로마협회 인증 강사 · 아로마 지도자 2급 자격과정</p>
+    <div class="footer-copy">© 2026 아로마모먼트 Aroma Moment. All rights reserved.</div>
+  </footer>
+
+  <!-- ===== FLOATING BUTTONS ===== -->
+  <div class="float-btns">
+    <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener"
+       class="float-btn float-btn-insta" title="인스타그램">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4.5"/>
+        <circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/>
+      </svg>
+    </a>
+    <a href="tel:010-6557-3810"
+       class="float-btn float-btn-call" title="전화 문의">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.73 16.92z"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    window.addEventListener('scroll', () => {
+      if (mobileMenu.classList.contains('open')) mobileMenu.classList.remove('open');
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const id = a.getAttribute('href');
+        const target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          const top = target.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
 </body>
 </html>

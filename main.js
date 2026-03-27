@@ -1,1 +1,1 @@
-// Add JS here
+// All scripts are embedded in index.html
