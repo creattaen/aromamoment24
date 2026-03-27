@@ -549,11 +549,12 @@
     .gallery-contact-inner { max-width: 1100px; margin: 0 auto; }
     .gallery-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
       gap: 1.2rem;
       margin-bottom: 3rem;
     }
     .gallery-item { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; }
+    .gallery-item.wide { grid-column: span 2; }
     .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .42s; display: block; }
     .gallery-item:hover img { transform: scale(1.05); }
     .contact-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
@@ -618,6 +619,7 @@
     }
     .float-btn:hover { transform: translateY(-3px); box-shadow: 0 7px 22px rgba(0,0,0,.28); }
     .float-btn-insta { background: linear-gradient(135deg,#405de6,#5851db,#833ab4,#c13584,#e1306c,#fd1d1d); }
+    .float-btn-kakao { background: #FEE500; }
     .float-btn-call  { background: var(--primary-dark); }
 
     /* ===== RESPONSIVE ===== */
@@ -626,6 +628,7 @@
       .about-badge { bottom: 10px; right: 10px; }
       .curriculum-grid { grid-template-columns: 1fr; }
       .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide { grid-column: span 1; }
     }
     @media (max-width: 768px) {
       .nav-links { display: none; }
@@ -708,13 +711,11 @@
         <ul class="credentials">
           <li>현) 아로마모먼트 대표</li>
           <li>현) 한국힐링아로마협회 소속 강사</li>
-          <li>현) 위즈덤 청소년 적성기기 소속 강사</li>
           <li>아로마전문지도사 1급</li>
           <li>아로마테라피지도사 2급</li>
           <li>아로마 DIY 전문지도사 2급</li>
           <li>아로마 색채심리 테라피</li>
           <li>사회복지사 1급 · 보육교사 1급</li>
-          <li>청소년 적성평가 전문과정 수료</li>
           <li>사회복지기관 감정아로마 특강 진행 다수</li>
           <li>공공기관 힐링프로그램 진행 다수</li>
         </ul>
@@ -916,7 +917,7 @@
           <li>에센셜 오일 키트 제공</li>
           <li>수료 후 무한 청강</li>
         </ul>
-        <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener" class="price-cta">
+        <a href="http://pf.kakao.com/_NxdHmn/chat" target="_blank" rel="noopener" class="price-cta">
           📩 수강 문의하기
         </a>
       </div>
@@ -931,11 +932,20 @@
         <h2 class="section-title">수업 현장 &amp; 문의</h2>
       </div>
       <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="https://aromamean.pages.dev/aromamean/use5.png" alt="수업 현장">
+        <div class="gallery-item wide">
+          <img src="wow/{BF92DE6B-DF19-4363-BED6-FAC55C4A71D5}.png" alt="수업 현장">
         </div>
         <div class="gallery-item">
-          <img src="https://aromamean.pages.dev/aromamean/use1.png" alt="아로마 제품">
+          <img src="wow/{7290799E-45C4-4FC1-BD15-56C6131B0EAE}.png" alt="감정 오브제">
+        </div>
+        <div class="gallery-item">
+          <img src="wow/{CB209546-81F5-47E0-9E2D-1419C17A658A}.png" alt="강의 현장">
+        </div>
+        <div class="gallery-item">
+          <img src="wow/{837D31E0-E9B1-4EE0-803E-3437E44482B2}.png" alt="아로마 오브제">
+        </div>
+        <div class="gallery-item">
+          <img src="wow/{FE9380CE-7569-4E58-82AD-C4524157CF57}.png" alt="감정 오브제">
         </div>
       </div>
       <div class="contact-row">
@@ -950,7 +960,7 @@
             <div class="contact-value">010.6557.3810</div>
           </div>
         </a>
-        <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener" class="contact-box">
+        <a href="https://www.instagram.com/amont_aroma" target="_blank" rel="noopener" class="contact-box">
           <div class="contact-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -960,7 +970,18 @@
           </div>
           <div>
             <div class="contact-label">인스타그램</div>
-            <div class="contact-value">@aroma_moment24</div>
+            <div class="contact-value">@amont_aroma</div>
+          </div>
+        </a>
+        <a href="http://pf.kakao.com/_NxdHmn/chat" target="_blank" rel="noopener" class="contact-box">
+          <div class="contact-icon" style="background:#FEE500;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#3C1E1E">
+              <path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.76 1.696 5.187 4.25 6.637L5.5 21l4.068-2.172C10.327 18.94 11.15 19 12 19c5.523 0 10-3.477 10-7.8C22 6.477 17.523 3 12 3z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">카카오톡 오픈채팅</div>
+            <div class="contact-value">채팅 문의하기</div>
           </div>
         </a>
       </div>
@@ -978,7 +999,7 @@
       <a href="#about">소개</a>
       <a href="#curriculum">커리큘럼</a>
       <a href="#info">수업정보</a>
-      <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.instagram.com/amont_aroma" target="_blank" rel="noopener">Instagram</a>
     </div>
     <p class="footer-assoc">한국힐링아로마협회 인증 강사 · 아로마 지도자 2급 자격과정</p>
     <div class="footer-copy">© 2026 아로마모먼트 Aroma Moment. All rights reserved.</div>
@@ -986,12 +1007,18 @@
 
   <!-- ===== FLOATING BUTTONS ===== -->
   <div class="float-btns">
-    <a href="https://www.instagram.com/aroma_moment24" target="_blank" rel="noopener"
+    <a href="https://www.instagram.com/amont_aroma" target="_blank" rel="noopener"
        class="float-btn float-btn-insta" title="인스타그램">
       <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
         <circle cx="12" cy="12" r="4.5"/>
         <circle cx="17.5" cy="6.5" r="1.2" fill="#fff" stroke="none"/>
+      </svg>
+    </a>
+    <a href="http://pf.kakao.com/_NxdHmn/chat" target="_blank" rel="noopener"
+       class="float-btn float-btn-kakao" title="카카오톡 문의">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="#3C1E1E">
+        <path d="M12 3C6.477 3 2 6.477 2 10.8c0 2.76 1.696 5.187 4.25 6.637L5.5 21l4.068-2.172C10.327 18.94 11.15 19 12 19c5.523 0 10-3.477 10-7.8C22 6.477 17.523 3 12 3z"/>
       </svg>
     </a>
     <a href="tel:010-6557-3810"
